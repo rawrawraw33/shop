@@ -5,11 +5,14 @@ import { Order1 } from './Order1';
 
 
 const showOrders = (props) => {
+  let summa = 0
+  props.orders.forEach(el => summa += Number.parseFloat(el.price))
   return (
     <div>
       {props.orders.map(el => (
-        <Order1 key={el.id} item={el}/>
+        <Order1 onDelete={props.onDelete} key={el.id} item={el}/>
       ))}
+      <p className='summa'>Summ : {new Intl.NumberFormat().format(summa)}$</p>
     </div>
   )
 }
@@ -18,7 +21,7 @@ const showOrders = (props) => {
 const showNothing = () => {
   return (
     <div className='empty'>
-      <h2>Nothing to show</h2>
+      <h2>В корзинці нічо нема</h2>
     </div>
   )
 }
@@ -29,11 +32,11 @@ export default function Header(props) {
   return (
     <header>
         <div>
-          <span className='logo'>House Staff</span>
+          <span className='logo'>Магазин Рітин Стиль</span>
           <ul className='nav'>
                 <li>Про нас</li>
-                <li>Контакты</li>
-                <li>Кабинет</li>
+                <li>Контакти</li>
+                <li>Кабінет</li>
           </ul>
           <HiOutlineShoppingBag onClick={() => setCartOpen(cartOpen = !cartOpen)} className={`shop-cart-button ${cartOpen && 'active'}`}/>
 

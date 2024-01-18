@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 
 export class Categories extends Component {
-    // Для хранения массива будем использовать состояние
+
     constructor(props) {
         super(props)
         this.state = {
             categories: [
+                {
+                    key: 'all',
+                    name: 'Все' 
+                },
                 {
                     key: 'chairs', // вместо id у нас тут будут ключи (уникальные)
                     name: 'Стулья' // А это просто название категории
@@ -29,7 +33,7 @@ export class Categories extends Component {
         return (
             <div className='categories'>
                 {this.state.categories.map(el => (
-                    <div>{el.name}</div>
+                    <div key={el.key} onClick={() => this.props.chooseCategory(el.key)}>{el.name}</div>
                 ))}
             </div>
         )
